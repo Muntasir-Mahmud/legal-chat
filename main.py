@@ -1,6 +1,8 @@
 import streamlit as st
 from dotenv import load_dotenv
 
+from utils import get_pdf_text
+
 
 def main():
     load_dotenv()
@@ -13,7 +15,15 @@ def main():
         st.subheader("legal documnets")
         pdf_docs = st.file_uploader("Upload your PDFs", accept_multiple_files=True)
         if st.button("Process"):
-            pass
+            st.spinner("Processing")
+            
+            # Get pdf text
+            raw_text = get_pdf_text(pdf_docs)
+
+            # Get the text chunks
+
+            # Create vector srore
+
 
 if __name__ == "__main__":
     main()
