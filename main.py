@@ -1,13 +1,23 @@
 import streamlit as st
 from dotenv import load_dotenv
 
-from utils import get_pdf_text, get_text_chunks
+from html_template import bot_template, css, user_template
+from utils import (get_conversation_chain, get_pdf_text, get_text_chunks,
+                   get_vectorstore)
 
 
 def main():
     load_dotenv()
     st.set_page_config(page_title="Chat with legal ai guru",
                        page_icon=":books:")
+    st.write(css,unsafe_allow_html=True)
+
+    if "conversation" not in st.session_state:
+        st.session_state.conversation = None
+
+    if "chat_history" not in st.session_state:
+        st.session_state.chat_history = None    
+
     st.header("Chat with legal ai guru")
     st.text_input("Ask your questions.")
 
